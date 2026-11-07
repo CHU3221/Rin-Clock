@@ -1,0 +1,108 @@
+/* Rin Clock — full viewport analog clock. 438×438 SVG design coordinates. */
+:root {
+  color-scheme: dark;
+  --gold:#d9b975;
+  --background:#080f1a;
+  --margin:clamp(20px,3.8vmin,46px);
+  --date-space:48px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{height:100%;background:var(--background)}
+body{
+  margin:0;
+  min-height:100vh;
+  min-height:100dvh;
+  overflow:hidden;
+  color:#ecf1fb;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:radial-gradient(ellipse 48% 45% at 50% 46%,#1c2d49 0%,#111c2d 62%,#080f1a 100%);
+}
+body[data-date-visible="false"]{--date-space:0px;--margin:clamp(16px,3vmin,36px)}
+button,input{font:inherit}
+button{cursor:pointer}
+.ambient{position:fixed;z-index:0;pointer-events:none;border-radius:50%;filter:blur(60px);opacity:.20}
+.ambient-one{width:26rem;height:26rem;background:#0a50dc;left:-15rem;top:34%}
+.ambient-two{width:24rem;height:24rem;background:#756343;right:-16rem;top:-6rem;opacity:.12}
+.main-stage{
+  position:relative;z-index:1;min-height:100vh;min-height:100dvh;
+  display:grid;place-items:center;
+}
+.clock-section{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;max-width:100%;}
+.clock-surround{
+  --clock-size:max(120px,min(calc(100vw - 2 * var(--margin)),calc(100dvh - 2 * var(--margin) - var(--date-space))));
+  width:var(--clock-size);height:var(--clock-size);
+  display:grid;place-items:center;
+  filter:drop-shadow(0 20px 34px rgba(0,0,0,.46));
+}
+.clock-svg{display:block;width:100%;height:100%;overflow:visible}
+/* Static white flare + #0A50DC neon. No animation or live SVG filters. */
+#coreNeon{opacity:.93}
+.date-line{
+  display:flex;align-items:center;justify-content:center;gap:18px;
+  margin-top:18px;min-height:22px;
+  color:rgba(229,220,200,.8);font-size:clamp(11px,1.45vmin,15px);
+  letter-spacing:.16em;text-align:center;white-space:nowrap;
+}
+.date-line[hidden]{display:none}
+.date-rule{display:block;width:26px;height:1px;background:linear-gradient(90deg,transparent,#a8894f,transparent)}
+.icon-button{
+  width:44px;height:44px;display:inline-grid;place-items:center;
+  border-radius:50%;border:1px solid rgba(217,185,117,.22);
+  color:#d9b975;background:rgba(14,24,40,.72);
+  transition:background .2s,border-color .2s;
+}
+.icon-button:hover{background:#1d2a41;border-color:rgba(241,216,158,.60)}
+.icon-button:focus-visible,input:focus-visible{outline:2px solid #83baff;outline-offset:3px}
+.settings-trigger{
+  position:fixed;top:max(15px,env(safe-area-inset-top));right:max(15px,env(safe-area-inset-right));
+  z-index:4;
+}
+/* Optional unobtrusive desk mode. Hidden trigger stays clickable/touchable.
+   Hover or keyboard focus reveals it; pointer departure hides it after 1.8 s. */
+.settings-trigger{transition:background .2s,border-color .2s,opacity .2s,transform .2s}
+body[data-auto-hide-settings="true"] .settings-trigger{
+  opacity:0;transform:translateY(-6px);
+}
+body[data-auto-hide-settings="true"] .settings-trigger:is(:hover,:focus-visible),
+body[data-auto-hide-settings="true"][data-settings-corner-visible="true"] .settings-trigger,
+body[data-auto-hide-settings="true"][data-settings-modal-open="true"] .settings-trigger{
+  opacity:1;transform:translateY(0);
+}
+.settings-modal{
+  position:fixed;inset:0;margin:auto;
+  width:min(390px,calc(100vw - 32px));max-height:calc(100dvh - 32px);
+  padding:0;border:1px solid rgba(217,185,117,.3);border-radius:20px;
+  background:linear-gradient(165deg,#19263d 0%,#101a2a 65%,#0e1625 100%);
+  color:#e9edf9;box-shadow:0 26px 100px rgba(0,0,0,.65),inset 0 1px rgba(255,255,255,.04);
+}
+.settings-modal::backdrop{background:rgba(1,5,13,.72);backdrop-filter:blur(5px)}
+.modal-header{display:flex;align-items:center;justify-content:space-between;padding:18px 22px 12px;border-bottom:1px solid rgba(217,185,117,.14)}
+.modal-header h2{margin:0;font-size:19px;letter-spacing:.02em;font-weight:650}
+.close-button{width:35px;height:35px}
+.modal-content{padding:12px 22px 22px}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 0;cursor:pointer}
+.toggle-row+.toggle-row{border-top:1px solid rgba(217,185,117,.09)}
+.toggle-row>span{display:flex;flex-direction:column;gap:4px;flex:1}
+.toggle-row strong{font-size:14px;font-weight:600}
+.toggle-row small{font-size:12px;line-height:1.4;color:#9dadc7}
+.toggle-row input{
+  appearance:none;position:relative;width:40px;height:23px;margin:0;
+  border:1px solid #56647a;background:#2d3b51;border-radius:16px;
+  flex-shrink:0;transition:background .16s,border-color .16s;
+}
+.toggle-row input::before{content:"";position:absolute;top:3px;left:3px;width:15px;height:15px;border-radius:50%;background:#dfe5ef;transition:transform .16s}
+.toggle-row input:checked{background:#536746;border-color:#c6ae78}
+.toggle-row input:checked::before{transform:translateX(17px);background:#f1d89e}
+@media(max-width:480px){
+  :root{--margin:22px;--date-space:46px}
+  .settings-trigger{top:max(12px,env(safe-area-inset-top));right:max(12px,env(safe-area-inset-right))}
+  .date-line{margin-top:14px}
+}
+@media(prefers-reduced-motion:reduce){.icon-button,.settings-trigger,.toggle-row input,.toggle-row input::before{transition:none}}
+
+/* Fully black page and dial, leaving the clock hands, stars, ticks, and gold rings intact. */
+html:has(body[data-background-off="true"]) {background:#000;}
+body[data-background-off="true"] {background:#000;}
+body[data-background-off="true"] .ambient {display:none;}
+body[data-background-off="true"] #dialBackground {fill:#000;}
+body[data-background-off="true"] #dialNebula {display:none;}

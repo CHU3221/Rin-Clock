@@ -1,0 +1,29 @@
+{
+  "name": "rin-clock",
+  "version": "1.0.0",
+  "description": "별도의 빌드 없이 배포할 수 있는 린/쿠리미 비공식 팬메이드 정적 웹 시계입니다.",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CHU3221/Rin-Clock.git"
+  },
+  "keywords": [],
+  "author": "",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/CHU3221/Rin-Clock/issues"
+  },
+  "homepage": "https://github.com/CHU3221/Rin-Clock#readme",
+  "devDependencies": {
+    "html-minifier-terser": "^7.2.0",
+    "vite": "^8.3.6"
+  },
+  "private": true
+}
