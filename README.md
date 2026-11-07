@@ -5,6 +5,8 @@
 
 별도의 계정이나 백엔드 없이 브라우저에서 실행되며, 모니터에 상시 띄워두거나 모바일 화면에서 사용할 수 있도록 제작되었습니다.
 
+[Open Rin Clock](https://rin-clock.pages.dev/)
+
 ![Rin Clock — Blue Background](docs/Rin-Clock-preview-blue.png)
 ![Rin Clock — Black Background](docs/Rin-Clock-preview-black.png)
 
@@ -27,7 +29,7 @@ Rin Clock은 캐릭터 일러스트와 SVG 시계 다이얼을 결합한 정적 
 
 1. [주요 특징](#주요-특징)
 2. [사용 기술](#사용-기술)
-3. [실행 방법](#실행-방법)
+3. [접속 및 실행 방법](#접속-및-실행-방법)
 4. [사용 방법](#사용-방법)
 5. [프로젝트 구조](#프로젝트-구조)
 6. [빌드 및 배포](#빌드-및-배포)
@@ -63,7 +65,12 @@ Rin Clock은 캐릭터 일러스트와 SVG 시계 다이얼을 결합한 정적 
 
 ---
 
-## 실행 방법
+## 접속 및 실행 방법
+
+배포된 웹사이트에 접속하여 사용할 수 있습니다.
+[Open Rin Clock](https://rin-clock.pages.dev/)
+
+또는 아래의 안내에 따라 직접 빌드하여 사용이 가능합니다.
 
 Node.js 및 npm이 설치된 환경에서 저장소를 클론하거나 다운로드한 뒤 프로젝트 루트에서 실행합니다.
 
