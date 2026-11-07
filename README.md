@@ -1,5 +1,4 @@
 # Rin Clock
----
 ⚠️ 비공식 팬메이드 프로젝트 Sakabam-Player is an unofficial fan-made project and is not affiliated with, endorsed by, or sponsored by STELLIVE or Aokumo Rin.
 
 아오쿠모 린과 쿠리미를 시계 바늘로 표현한 비공식 팬메이드 아날로그 웹 시계입니다.
